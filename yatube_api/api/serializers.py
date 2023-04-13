@@ -18,8 +18,9 @@ class CommentSerializer(serializers.ModelSerializer):
                                           slug_field='username')
 
     class Meta:
-        fields = '__all__'
         model = Comment
+        fields = ('author', 'text', 'created', 'id', 'post')
+        read_only_fields = ['post']
 
 
 class FollowSerializer(serializers.ModelSerializer):
@@ -55,5 +56,5 @@ class FollowSerializer(serializers.ModelSerializer):
 class GroupSerializer(serializers.ModelSerializer):
 
     class Meta:
-        fields = ('id', 'title')
+        fields = ('id', 'title', 'slug')
         model = Group

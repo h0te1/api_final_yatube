@@ -25,3 +25,4 @@ simplejson==3.19.1
 sqlparse==0.4.3
 toml==0.10.2
 urllib3==1.26.15
+djoser==2.1.0

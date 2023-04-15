@@ -17,19 +17,30 @@
 ## 1) Клонировать репозиторий
 ## 2) Создать и активировать виртуальное окружение для проекта
 
+```bash
 python -m venv venv
 
 source venv/scripts/activate
+```
 
 ## 3) Установить зависимости
+
+```bash
 python pip install -r requirements.txt
+```
 
 ## 4) Сделать миграции
+
+```bash
 python manage.py makemigrations
 python manage.py migrate
+```
 
 ## 5) Запустить сервер
+
+```bash
 python manage.py runserver
+```
 
 # Примеры
 

@@ -5,7 +5,7 @@ from rest_framework import filters, permissions, status, viewsets
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from rest_framework.response import Response
 from rest_framework.pagination import LimitOffsetPagination
-
+from rest_framework import mixins
 from .permission import IsOwnerOrReadOnly
 from .serializers import (
     CommentSerializer, FollowSerializer, GroupSerializer, PostSerializer)
@@ -36,7 +36,7 @@ class CommentViewSet(viewsets.ModelViewSet):
         return post.comments.all()
 
 
-class GroupViewSet(viewsets.ModelViewSet):
+class GroupViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Group.objects.all()
     serializer_class = GroupSerializer
     permission_classes = [IsOwnerOrReadOnly]
@@ -45,8 +45,8 @@ class GroupViewSet(viewsets.ModelViewSet):
         return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
 
 
-class FollowViewSet(viewsets.ModelViewSet):
-    http_method_names = ['get', 'post']
+class FollowViewSet(mixins.CreateModelMixin, mixins.ListModelMixin,
+                    viewsets.GenericViewSet):
     permission_classes = [permissions.IsAuthenticated]
     serializer_class = FollowSerializer
     filter_backends = [filters.SearchFilter]
